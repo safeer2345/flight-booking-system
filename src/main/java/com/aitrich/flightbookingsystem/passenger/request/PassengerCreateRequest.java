@@ -1,15 +1,10 @@
-package com.aitrich.flightbookingsystem.flightbooking.request;
+package com.aitrich.flightbookingsystem.passenger.request;
 
 
 
 
-
-
-
-
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-
-
 
 
 import lombok.AccessLevel;
@@ -20,17 +15,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class FlightBookingCreateRequest {
-
+public class PassengerCreateRequest {
+	
 	@NotBlank
-	private String passengerId;
+	private String firstName;
 	@NotBlank
-	private String departure;
+	private String lastName;
 	@NotBlank
-	private String arrival;
-	@NotBlank
-	private String departureDate;
-	@NotBlank
-	private String arrivalDate;
+	@Email
+	private String email;
 
 }

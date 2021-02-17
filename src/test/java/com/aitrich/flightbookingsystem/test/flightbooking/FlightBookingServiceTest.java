@@ -46,83 +46,83 @@ public class FlightBookingServiceTest {
 		flightBookingService = new FlightBookingServiceImpl();
 	}
 
-//	@Test
-//	public void testFlightBookingSave() throws Exception {
-//
-//		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now()));
-//		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
-//		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
-//		when(flightBookingRepository.save(flightBookingEntity)).thenReturn(flightBookingEntity);
-//		FlightBookingEntity entity = flightBookingService.bookFlight(flightBookingEntity);
-//		assertEquals("FB-1", entity.getId());
-//		assertEquals(passengerEntity, entity.getPassengerEntity());
-//		assertEquals(flightEntities, entity.getFlights());
-//	}
-//
-//	@Test
-//	public void testFlightBookingUpdate() {
-//		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now()));
-//		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
-//		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
-//		when(flightBookingRepository.save(flightBookingEntity)).thenReturn(flightBookingEntity);
-//		FlightBookingEntity entity = flightBookingService.bookFlight(flightBookingEntity);
-//		assertEquals("FB-1", entity.getId());
-//		assertEquals(passengerEntity, entity.getPassengerEntity());
-//		assertEquals(flightEntities, entity.getFlights());
-//	}
-//
-//	@Test
-//	public void testFindAllFlightBooking() {
-//		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now()));
-//
-//		List<FlightBookingEntity> flightBookingEntities = new ArrayList<FlightBookingEntity>();
-//		flightBookingEntities.add(new FlightBookingEntity("FB-1",
-//				new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com"), flightEntities));
-//		flightBookingEntities.add(new FlightBookingEntity("FB-2",
-//				new PassengerEntity("PR-2", "sruthi", "joes", "sruthijose@gmail.com"), flightEntities));
-//		flightBookingEntities.add(new FlightBookingEntity("FB-3",
-//				new PassengerEntity("PR-3", "vinaya", "mukundan", "vinayamukundan@gmail.com"), flightEntities));
-//		when(flightBookingRepository.findAll()).thenReturn(flightBookingEntities);
-//		List<FlightBookingEntity> entities = flightBookingService.findAllBookedFlight();
-//		assertEquals(3, entities.size());
-//	}
-//
-//	@Test
-//	public void testFlightBookingFIndById() {
-//
-//		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now()));
-//		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
-//		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
-//
-//		Optional<FlightBookingEntity> optional= Optional.of(flightBookingEntity);
-//		Mockito.when(flightBookingRepository.findById("FB-1")).thenReturn(optional);
-//		assertAll(() -> Optional.ofNullable(flightBookingService.findBookedFlightById("FB-1"))
-//				.orElseThrow(() -> new ResourceNotFoundException("test")));
-//	}
-//
-//	@Test
-//	public void testAirportFlightBooking() {
-//		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now()));
-//
-//		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1",
-//				new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com"), flightEntities);
-//		flightBookingService.deleteBookedFlight(flightBookingEntity.getId());
-//		verify(flightBookingRepository, times(1)).deleteById(flightBookingEntity.getId());
-//	}
+	@Test
+	public void testFlightBookingSave() throws Exception {
+
+		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now(), null));
+		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
+		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
+		when(flightBookingRepository.save(flightBookingEntity)).thenReturn(flightBookingEntity);
+		FlightBookingEntity entity = flightBookingService.bookFlight(flightBookingEntity);
+		assertEquals("FB-1", entity.getId());
+		assertEquals(passengerEntity, entity.getPassengerEntity());
+		assertEquals(flightEntities, entity.getFlights());
+	}
+
+	@Test
+	public void testFlightBookingUpdate() {
+		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now(), null));
+		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
+		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
+		when(flightBookingRepository.save(flightBookingEntity)).thenReturn(flightBookingEntity);
+		FlightBookingEntity entity = flightBookingService.bookFlight(flightBookingEntity);
+		assertEquals("FB-1", entity.getId());
+		assertEquals(passengerEntity, entity.getPassengerEntity());
+		assertEquals(flightEntities, entity.getFlights());
+	}
+
+	@Test
+	public void testFindAllFlightBooking() {
+		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now(), null));
+
+		List<FlightBookingEntity> flightBookingEntities = new ArrayList<FlightBookingEntity>();
+		flightBookingEntities.add(new FlightBookingEntity("FB-1",
+				new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null), flightEntities));
+		flightBookingEntities.add(new FlightBookingEntity("FB-2",
+				new PassengerEntity("PR-2", "sruthi", "joes", "sruthijose@gmail.com", null), flightEntities));
+		flightBookingEntities.add(new FlightBookingEntity("FB-3",
+				new PassengerEntity("PR-3", "vinaya", "mukundan", "vinayamukundan@gmail.com", null), flightEntities));
+		when(flightBookingRepository.findAll()).thenReturn(flightBookingEntities);
+		List<FlightBookingEntity> entities = flightBookingService.findAllBookedFlight();
+		assertEquals(3, entities.size());
+	}
+
+	@Test
+	public void testFlightBookingFIndById() {
+
+		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now(), null));
+		PassengerEntity passengerEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
+		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1", passengerEntity, flightEntities);
+
+		Optional<FlightBookingEntity> optional= Optional.of(flightBookingEntity);
+		Mockito.when(flightBookingRepository.findById("FB-1")).thenReturn(optional);
+		assertAll(() -> Optional.ofNullable(flightBookingService.findBookedFlightById("FB-1"))
+				.orElseThrow(() -> new ResourceNotFoundException("test")));
+	}
+
+	@Test
+	public void testAirportFlightBooking() {
+		Set<FlightEntity> flightEntities = new HashSet<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1", "uk", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2", "sa", "us", LocalDateTime.now(), LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3", "uk", "sa", LocalDateTime.now(), LocalDateTime.now(), null));
+
+		FlightBookingEntity flightBookingEntity = new FlightBookingEntity("FB-1",
+				new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null), flightEntities);
+		flightBookingService.deleteBookedFlight(flightBookingEntity.getId());
+		verify(flightBookingRepository, times(1)).deleteById(flightBookingEntity.getId());
+	}
 
 }

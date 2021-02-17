@@ -17,6 +17,13 @@ import org.hibernate.annotations.Parameter;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+@Data
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Entity
 @Table(name = "flight_booked_passenger")
 public class FlightBookingEntity {
@@ -31,63 +38,6 @@ public class FlightBookingEntity {
 
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "booked_flights", joinColumns = @JoinColumn(name = "booking_id"), inverseJoinColumns = @JoinColumn(name = "flight_id"))
-	@JsonIgnore 
 	private Set<FlightEntity> flights;
-
-	public FlightBookingEntity() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-
-	public FlightBookingEntity(String id, PassengerEntity passengerEntity, Set<FlightEntity> flights) {
-		super();
-		this.id = id;
-		this.passengerEntity = passengerEntity;
-		this.flights = flights;
-	}
-
-
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public PassengerEntity getPassengerEntity() {
-		return passengerEntity;
-	}
-
-	public void setPassengerEntity(PassengerEntity passengerEntity) {
-		this.passengerEntity = passengerEntity;
-	}
-
-	public Set<FlightEntity> getFlights() {
-		return flights;
-	}
-
-	public void setFlights(Set<FlightEntity> flights) {
-		this.flights = flights;
-	}
-	
-	/*
-	 * public void removeBooking(FlightEntity flightgEntity) {
-	 * this.getFlights().remove(flightgEntity);
-	 * flightBookingEntity.getFlights().remove(this); }
-	 * 
-	 * public void removeBooking() { for (FlightEntity flightEntity : new
-	 * HashSet<>(flights)) { removeBooking(flights); } }
-	 */
-	
-
-	@Override
-	public String toString() {
-		return "FlightBookingEntity [id=" + id + ", passengerEntity=" + passengerEntity + "]";
-	}
-
 	
 }

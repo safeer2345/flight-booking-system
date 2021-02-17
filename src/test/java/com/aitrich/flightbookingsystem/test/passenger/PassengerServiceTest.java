@@ -39,7 +39,7 @@ public class PassengerServiceTest {
 
 	@Test
 	public void testPersonSave() {
-		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
+		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
 		when(passengerRepository.save(passengertEntity)).thenReturn(passengertEntity);
 		PassengerEntity entity = passengerService.savePassenger(passengertEntity);
 		assertEquals("PR-1", entity.getId());
@@ -50,7 +50,7 @@ public class PassengerServiceTest {
 
 	@Test
 	public void testPersonUpdate() {
-		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
+		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
 		when(passengerRepository.save(passengertEntity)).thenReturn(passengertEntity);
 		PassengerEntity entity = passengerService.savePassenger(passengertEntity);
 		assertEquals("PR-1", entity.getId());
@@ -62,9 +62,9 @@ public class PassengerServiceTest {
 	@Test
 	public void testFindAllAirport() {
 		List<PassengerEntity> passengerEntities = new ArrayList<PassengerEntity>();
-		passengerEntities.add(new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com"));
-		passengerEntities.add(new PassengerEntity("PR-2", "sruthi", "joes", "sruthijose@gmail.com"));
-		passengerEntities.add(new PassengerEntity("PR-3", "vinaya", "mukundan", "vinayamukundan@gmail.com"));
+		passengerEntities.add(new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null));
+		passengerEntities.add(new PassengerEntity("PR-2", "sruthi", "joes", "sruthijose@gmail.com", null));
+		passengerEntities.add(new PassengerEntity("PR-3", "vinaya", "mukundan", "vinayamukundan@gmail.com", null));
 		when(passengerRepository.findAll()).thenReturn(passengerEntities);
 		List<PassengerEntity> entities = passengerService.findAllPassenger();
 		assertEquals(3, entities.size());
@@ -72,7 +72,7 @@ public class PassengerServiceTest {
 
 	@Test
 	public void testAirportFIndById() {
-		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
+		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
 		Optional<PassengerEntity> optional = Optional.of(passengertEntity);
 		Mockito.when(passengerRepository.findById("PR-1")).thenReturn(optional);
 		assertAll(() -> Optional.ofNullable(passengerService.findPassengerById("PR-1"))
@@ -81,7 +81,7 @@ public class PassengerServiceTest {
 
 	@Test
 	public void testAirportDeleteById() {
-		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com");
+		PassengerEntity passengertEntity = new PassengerEntity("PR-1", "safeer", "ismail", "safeer2345@gmail.com", null);
 		passengerService.deletePassenger(passengertEntity.getId());
 		verify(passengerRepository, times(1)).deleteById(passengertEntity.getId());
 	}

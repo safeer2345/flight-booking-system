@@ -24,7 +24,7 @@ import com.aitrich.flightbookingsystem.exception.DuplicateResourceExcepion;
 import com.aitrich.flightbookingsystem.exception.ResourceNotFoundException;
 
 @RestController
-@RequestMapping("airportcontroller")
+@RequestMapping("/airportcontroller")
 public class AirportController {
 
 	@Autowired
@@ -34,8 +34,16 @@ public class AirportController {
 
 	@PostMapping
 	public ResponseEntity<AirportEntity> saveAirport(@Valid@RequestBody AirportEntity airportEntity) throws Exception {
+		AirportEntity airportEntityObj = null;
 		logger.info("save airport at controller " + airportEntity);
-		AirportEntity airportEntityObj= airportService.findAirportById(airportEntity.getIataCode());
+		try
+		{
+			 airportEntityObj= airportService.findAirportById(airportEntity.getIataCode());
+		}
+		catch (ResourceNotFoundException e) {
+			// TODO: handle exception
+		}
+		
 //		AirportEntity airportEntityObj = Optional.ofNullable(airportService.findAirportById(airportEntity.getIataCode())).orElseThrow(new ResourceNotFoundException(""));
 		if(airportEntityObj==null)
 		{
@@ -44,16 +52,16 @@ public class AirportController {
 				throw new ResourceNotFoundException("airport saving failed : "+airportEntity);
 			}
 			
-			return new ResponseEntity<AirportEntity>(HttpStatus.OK);
+			return new ResponseEntity<AirportEntity>(airportEntityObj,HttpStatus.OK);
 		}
 		
 		throw new DuplicateResourceExcepion("airport already exist : "+airportEntity);
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<AirportEntity> updateAirport(@PathVariable(value = "id") String id,@Valid@RequestBody AirportEntity airportEntity) throws Exception {
+	@PutMapping("/{iataCode}")
+	public ResponseEntity<AirportEntity> updateAirport(@PathVariable(value = "iataCode") String iataCode,@Valid@RequestBody AirportEntity airportEntity) throws Exception {
 		logger.info("update airport at controller " + airportEntity);
-		AirportEntity entity = airportService.findAirportById(airportEntity.getIataCode());
+		AirportEntity entity = airportService.findAirportById(iataCode);
 
 		if (entity == null) {
 			throw new ResourceNotFoundException("updation failed no airport exist in the given details");
@@ -70,14 +78,14 @@ public class AirportController {
 		return new ResponseEntity<AirportEntity>(HttpStatus.OK);
 	}
 
-	@GetMapping("/findAllAirport")
-	public ResponseEntity<Object> findAllAirport() throws Exception {
+	@GetMapping
+	public ResponseEntity<List<AirportEntity>> findAllAirport() throws Exception {
 		logger.info("find all airport at controller");
 		List<AirportEntity> airportEntities = airportService.findAllAirport();
 		if (airportEntities.isEmpty()) {
 			throw new ResourceNotFoundException("no airport exist");
 		}
-		return new ResponseEntity<Object>(airportEntities, HttpStatus.OK);
+		return new ResponseEntity<List<AirportEntity>>(airportEntities, HttpStatus.OK);
 
 	}
 

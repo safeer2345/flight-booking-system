@@ -60,7 +60,7 @@ public class FlightControllerTest {
 	public void flightSaveTest() throws JsonProcessingException, Exception {
 		String uri = "/flightcontroller/saveFlight";
 		FlightEntity flightEntity = new FlightEntity("FT-1", "uk", "us", LocalDateTime.parse("2021-02-12T23:34:36.410"),
-				LocalDateTime.parse("2021-02-12T23:34:36.410"));
+				LocalDateTime.parse("2021-02-12T23:34:36.410"), null);
 		when(flightService.saveFlight(Mockito.any(FlightEntity.class))).thenReturn(flightEntity);
 		mockMvc.perform(post(uri).contentType(MediaType.APPLICATION_JSON).content(toJson(flightEntity)))
 				.andExpect(status().isOk()).andExpect(content().contentType(MediaType.APPLICATION_JSON))

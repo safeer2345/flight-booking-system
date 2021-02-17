@@ -1,36 +1,34 @@
 package com.aitrich.flightbookingsystem.flightbooking.request;
 
-
-
-
-
-
+import java.time.LocalDateTime;
 
 
 import javax.validation.constraints.NotBlank;
-
+import javax.validation.constraints.NotNull;
 
 
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class FlightBookingCreateRequest {
+@Getter
+@Setter
+@ToString
+public class FlightBookingFlightRequest {
 
-	@NotBlank
-	private String passengerId;
 	@NotBlank
 	private String departure;
 	@NotBlank
 	private String arrival;
-	@NotBlank
-	private String departureDate;
-	@NotBlank
-	private String arrivalDate;
+	@NotNull
+	private LocalDateTime departureDate;
+	@NotNull
+	private LocalDateTime arrivalDate;
 
 }

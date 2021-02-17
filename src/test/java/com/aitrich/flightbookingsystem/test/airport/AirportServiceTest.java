@@ -1,35 +1,34 @@
 package com.aitrich.flightbookingsystem.test.airport;
 
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.sameInstance;
-import static org.junit.Assert.assertNotNull;
+
+
+
+
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doReturn;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
+
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
+
 
 import com.aitrich.flightbookingsystem.airport.AirportService;
 import com.aitrich.flightbookingsystem.airport.AirportServiceImpl;
@@ -71,39 +70,47 @@ public class AirportServiceTest {
 //	    
 //	    }
 //
-//	@Test
-//	public void testAirportSave() {
-//		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
-//		when(airportRepository.save(airportEntity)).thenReturn(airportEntity);
-//		AirportEntity entity = airportService.saveAirport(airportEntity);
-//		assertEquals("koc", entity.getIataCode());
-//		assertEquals("koc-ind", entity.getName());
-//		assertEquals("kochin", entity.getCountryIsoCode());
-//	}
-//
-//	@Test
-//	public void testAirportUpdate() {
-//		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
-//		when(airportRepository.save(airportEntity)).thenReturn(airportEntity);
-//		AirportEntity entity = airportService.updateAirport(airportEntity);
-//		assertEquals("koc", entity.getIataCode());
-//		assertEquals("koc-ind", entity.getName());
-//		assertEquals("kochin", entity.getCountryIsoCode());
-//	}
-//
-//	@Test
-//	public void testFindAllAirport() {
-//		List<AirportEntity> airportEntities = new ArrayList<AirportEntity>();
-//		airportEntities.add(new AirportEntity("koc", "koc-ind", "kochin"));
-//		airportEntities.add(new AirportEntity("clt", "clt-ind", "calicut"));
-//		airportEntities.add(new AirportEntity("tvm", "tvm-ind", "trivandrum"));
-//		when(airportRepository.findAll()).thenReturn(airportEntities);
-//		List<AirportEntity> entities = airportService.findAllAirport();
-//		assertEquals(3, entities.size());
-//	}
+	@Test
+	public void testAirportSave() {
+		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
+		when(airportRepository.save(airportEntity)).thenReturn(airportEntity);
+		AirportEntity entity = airportService.saveAirport(airportEntity);
+		assertEquals("koc", entity.getIataCode());
+		assertEquals("koc-ind", entity.getName());
+		assertEquals("kochin", entity.getCountryIsoCode());
+	}
 
-//	@Test()
-//	public void testAirportFIndById() throws ResourceNotFoundException{
+	@Test
+	public void testAirportUpdate() {
+		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
+		when(airportRepository.save(airportEntity)).thenReturn(airportEntity);
+		AirportEntity entity = airportService.updateAirport(airportEntity);
+		assertEquals("koc", entity.getIataCode());
+		assertEquals("koc-ind", entity.getName());
+		assertEquals("kochin", entity.getCountryIsoCode());
+	}
+
+	@Test
+	public void testFindAllAirport() {
+		List<AirportEntity> airportEntities = new ArrayList<AirportEntity>();
+		airportEntities.add(new AirportEntity("koc", "koc-ind", "kochin"));
+		airportEntities.add(new AirportEntity("clt", "clt-ind", "calicut"));
+		airportEntities.add(new AirportEntity("tvm", "tvm-ind", "trivandrum"));
+		when(airportRepository.findAll()).thenReturn(airportEntities);
+		List<AirportEntity> entities = airportService.findAllAirport();
+		assertEquals(3, entities.size());
+	}
+
+	@Test()
+	public void testAirportFIndById() throws ResourceNotFoundException{
+		
+		final AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
+		 Optional<AirportEntity> optionalEntityType = Optional.of(airportEntity);
+		 Mockito.when(airportRepository.findById("koc")).thenReturn(optionalEntityType);
+		 
+		 assertAll(() -> Optional
+			      .ofNullable(airportService.findAirportById("koc"))
+			      .orElseThrow(()->new ResourceNotFoundException("test")));
 		
 //		when(airportRepository.findById("koc").get()).thenReturn(airportEntity);
 //		AirportEntity entity = airportService.findAirportById(airportEntity.getIataCode());
@@ -154,24 +161,17 @@ public class AirportServiceTest {
 //		AirportEntity entityObj=airportService.findAirportById("1");
 //		assertEquals(entity.getIataCode(), entityObj.getIataCode());
 		
-//		final AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
-//		 Optional<AirportEntity> optionalEntityType = Optional.of(airportEntity);
-//		 Mockito.when(airportRepository.findById("koc")).thenReturn(optionalEntityType);
-		 
-//		 assertAll(() -> Optional
-//			      .ofNullable(airportService.findAirportById("koc"))
-//			      .orElseThrow(()->new ResourceNotFoundException("test")));
 //		 assertThat(airportService.findAirportById("koc")).isNotNull();  
 	
 //		 Mockito.verify(airportService).findAirportById("koc");
-//	}
+	}
 
-//	@Test
-//	public void testAirportDeleteById() {
-//		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
-//		airportService.deleteAirport(airportEntity.getIataCode());
-//		verify(airportRepository, times(1)).deleteById(airportEntity.getIataCode());
-//
-//	}
+	@Test
+	public void testAirportDeleteById() {
+		AirportEntity airportEntity = new AirportEntity("koc", "koc-ind", "kochin");
+		airportService.deleteAirport(airportEntity.getIataCode());
+		verify(airportRepository, times(1)).deleteById(airportEntity.getIataCode());
+
+	}
 
 }

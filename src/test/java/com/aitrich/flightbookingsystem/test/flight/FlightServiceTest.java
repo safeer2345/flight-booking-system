@@ -39,9 +39,9 @@ public class FlightServiceTest {
 		flightService = new FlightServiceImpl();
 	}
 
-	//@Test
+	@Test
 	public void testPersonSave() {
-		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"));
+		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"), null);
 		when(flightRepository.save(flightEntity)).thenReturn(flightEntity);
 		FlightEntity entity = flightService.saveFlight(flightEntity);
 		assertEquals("FT-1", entity.getId());
@@ -50,46 +50,46 @@ public class FlightServiceTest {
 		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getDepartureDate());
 		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getArrivalDate());
 	}
-//
-//	@Test
-//	public void testPersonUpdate() {
-//		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"));
-//		when(flightRepository.save(flightEntity)).thenReturn(flightEntity);
-//		FlightEntity entity = flightService.saveFlight(flightEntity);
-//		assertEquals("FT-1", entity.getId());
-//		assertEquals("uk", entity.getDeparture());
-//		assertEquals("us", entity.getArrival());
-//		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getDepartureDate());
-//		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getArrivalDate());
-//	}
-//
-//	@Test
-//	public void testFindAllAirport() {
-//		List<FlightEntity> flightEntities = new ArrayList<FlightEntity>();
-//		flightEntities.add(new FlightEntity("FT-1","uk","us",LocalDateTime.now(),LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-2","sa","us",LocalDateTime.now(),LocalDateTime.now()));
-//		flightEntities.add(new FlightEntity("FT-3","uk","sa",LocalDateTime.now(),LocalDateTime.now()));
-//		when(flightRepository.findAll()).thenReturn(flightEntities);
-//		List<FlightEntity> entities = flightService.findAllFlight();
-//		assertEquals(3, entities.size());
-//	}
-//
-//	@Test
-//	public void testAirportFIndById() {
-//		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"));
-//		Optional<FlightEntity> optional=Optional.of(flightEntity);
-//		when(flightRepository.findById("FT-1")).thenReturn(optional);
-//		
-//		assertAll(() -> Optional
-//			      .ofNullable(flightService.findFlightById("FT-1"))
-//			      .orElseThrow(()->new ResourceNotFoundException("test")));
-//	}
-//	@Test
-//	public void testAirportDeleteById() {
-//		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.now(),LocalDateTime.now());
-//		flightService.deleteFlight(flightEntity.getId());
-//		verify(flightRepository, times(1)).deleteById(flightEntity.getId());
-//	}
-//
+
+	@Test
+	public void testPersonUpdate() {
+		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"), null);
+		when(flightRepository.save(flightEntity)).thenReturn(flightEntity);
+		FlightEntity entity = flightService.saveFlight(flightEntity);
+		assertEquals("FT-1", entity.getId());
+		assertEquals("uk", entity.getDeparture());
+		assertEquals("us", entity.getArrival());
+		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getDepartureDate());
+		assertEquals(LocalDateTime.parse("2021-02-12T23:34:36.410"), entity.getArrivalDate());
+	}
+
+	@Test
+	public void testFindAllAirport() {
+		List<FlightEntity> flightEntities = new ArrayList<FlightEntity>();
+		flightEntities.add(new FlightEntity("FT-1","uk","us",LocalDateTime.now(),LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-2","sa","us",LocalDateTime.now(),LocalDateTime.now(), null));
+		flightEntities.add(new FlightEntity("FT-3","uk","sa",LocalDateTime.now(),LocalDateTime.now(), null));
+		when(flightRepository.findAll()).thenReturn(flightEntities);
+		List<FlightEntity> entities = flightService.findAllFlight();
+		assertEquals(3, entities.size());
+	}
+
+	@Test
+	public void testAirportFIndById() {
+		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.parse("2021-02-12T23:34:36.410"),LocalDateTime.parse("2021-02-12T23:34:36.410"), null);
+		Optional<FlightEntity> optional=Optional.of(flightEntity);
+		when(flightRepository.findById("FT-1")).thenReturn(optional);
+		
+		assertAll(() -> Optional
+			      .ofNullable(flightService.findFlightById("FT-1"))
+			      .orElseThrow(()->new ResourceNotFoundException("test")));
+	}
+	@Test
+	public void testAirportDeleteById() {
+		FlightEntity flightEntity = new FlightEntity("FT-1","uk","us",LocalDateTime.now(),LocalDateTime.now(), null);
+		flightService.deleteFlight(flightEntity.getId());
+		verify(flightRepository, times(1)).deleteById(flightEntity.getId());
+	}
+
 
 }
